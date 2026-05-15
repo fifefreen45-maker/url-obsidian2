@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <title>توجيه إلى أوبسيديان...</title>
     <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        const targetUrl = urlParams.get('url');
+        // التعديل الجديد: التقاط الرابط بالكامل وتجاهل الفواصل
+        const fullUrl = window.location.href;
+        const targetUrl = fullUrl.includes('?url=') ? fullUrl.split('?url=')[1] : null;
 
         if (targetUrl && targetUrl.startsWith('obsidian://')) {
             window.location.replace(targetUrl);
@@ -18,4 +19,3 @@
     <h3>جاري فتح الملاحظة في أوبسيديان...</h3>
 </body>
 </html>
-
