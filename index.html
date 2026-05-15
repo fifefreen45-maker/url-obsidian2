@@ -4,18 +4,28 @@
     <meta charset="UTF-8">
     <title>توجيه إلى أوبسيديان...</title>
     <script>
-        // التعديل الجديد: التقاط الرابط بالكامل وتجاهل الفواصل
-        const fullUrl = window.location.href;
-        const targetUrl = fullUrl.includes('?url=') ? fullUrl.split('?url=')[1] : null;
+        function redirectToObsidian() {
+            const fullUrl = window.location.href;
+            if (!fullUrl.includes('?url=')) {
+                document.getElementById('status').innerText = 'الرابط غير موجود.';
+                return;
+            }
 
-        if (targetUrl && targetUrl.startsWith('obsidian://')) {
-            window.location.replace(targetUrl);
-        } else {
-            document.write('الرابط غير صالح أو غير موجود.');
+            // استخراج الرابط وفك تشفيره ليفهمه أوبسيديان
+            let targetUrl = fullUrl.split('?url=')[1];
+            targetUrl = decodeURIComponent(targetUrl);
+
+            if (targetUrl.startsWith('obsidian://')) {
+                window.location.href = targetUrl;
+            } else {
+                document.getElementById('status').innerText = 'الرابط غير صالح.';
+            }
         }
+        window.onload = redirectToObsidian;
     </script>
 </head>
 <body style="background-color:#1e1e1e; color:white; text-align:center; padding-top:50px; font-family:sans-serif;">
-    <h3>جاري فتح الملاحظة في أوبسيديان...</h3>
+    <h3 id="status">جاري فتح الملاحظة في أوبسيديان...</h3>
+    <p>إذا لم يفتح التطبيق تلقائياً، تأكد من تثبيت أوبسيديان على هذا الجهاز.</p>
 </body>
 </html>
