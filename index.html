@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>توجيه إلى أوبسيديان...</title>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const targetUrl = urlParams.get('url');
+
+        if (targetUrl && targetUrl.startsWith('obsidian://')) {
+            window.location.replace(targetUrl);
+        } else {
+            document.write('الرابط غير صالح أو غير موجود.');
+        }
+    </script>
+</head>
+<body style="background-color:#1e1e1e; color:white; text-align:center; padding-top:50px; font-family:sans-serif;">
+    <h3>جاري فتح الملاحظة في أوبسيديان...</h3>
+</body>
+</html>
+
